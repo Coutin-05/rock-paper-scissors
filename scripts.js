@@ -30,7 +30,7 @@ function getPlayerChoice() { //get the player input and converts to lowercase
     return choiceLowerCase;
 }
 
-function game() { //run the playRound function 5 times and log it's result
+/*function game() { //run the playRound function 5 times and log it's result
     for (let i = 0; i < 5; i++) {
         let playerSelection = getPlayerChoice ();
         let computerSelection = getComputerChoice ();

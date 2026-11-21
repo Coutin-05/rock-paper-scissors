@@ -41,6 +41,9 @@ game()*/
 
 let userScore = 0;
 let computerScore = 0;
+let roundsPlayed = 0;
+let matchFinished = false;
+const MATCH_ROUND_LIMIT = 5;
 const userScore_span = document.getElementById("user-score");
 const computerScore_span = document.getElementById("computer-score");
 const scoreBoard_span = document.querySelector(".score-board");
@@ -48,6 +51,7 @@ const result_p = document.querySelector(".result > p");
 const rock_div = document.getElementById("r");
 const paper_div = document.getElementById("p");
 const scissors_div = document.getElementById("s");
+const restart_button = document.getElementById("restart-button");
 
 function getComputerChoice() {
   //generate a random number up to 3 and assign it to one of the options, rock, paper or scissors
@@ -95,7 +99,37 @@ function tie(userChoice, computerChoice) {
   setTimeout(() => userChoice_div.classList.remove("grey-glow"), 300);
 }
 
+function finishMatch() {
+  matchFinished = true;
+  restart_button.hidden = false;
+
+  if (userScore > computerScore) {
+    result_p.textContent = `You win the match! ${userScore}-${computerScore} 🏆`;
+  } else if (computerScore > userScore) {
+    result_p.textContent = `Computer wins the match! ${computerScore}-${userScore}`;
+  } else {
+    result_p.textContent = `The match is a draw! ${userScore}-${computerScore}`;
+  }
+}
+
+function restartMatch() {
+  userScore = 0;
+  computerScore = 0;
+  roundsPlayed = 0;
+  matchFinished = false;
+  userScore_span.textContent = "00";
+  computerScore_span.textContent = "00";
+  result_p.textContent = "Let's play a game!!";
+  restart_button.hidden = true;
+
+  for (const choice of [rock_div, paper_div, scissors_div]) {
+    choice.classList.remove("green-glow", "red-glow", "grey-glow");
+  }
+}
+
 function game(userChoice) {
+  if (matchFinished) return;
+
   const computerChoice = getComputerChoice();
   switch (userChoice + computerChoice) {
     case "rs":
@@ -114,6 +148,11 @@ function game(userChoice) {
       tie(userChoice, computerChoice);
       break;
   }
+
+  roundsPlayed++;
+  if (roundsPlayed === MATCH_ROUND_LIMIT) {
+    finishMatch();
+  }
 }
 
 function main() {
@@ -122,6 +161,7 @@ function main() {
   paper_div.addEventListener("click", () => game("p"));
 
   scissors_div.addEventListener("click", () => game("s"));
+  restart_button.addEventListener("click", restartMatch);
 }
 
 main();

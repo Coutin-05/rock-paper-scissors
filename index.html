@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="styles.css" />
-    <script src="scripts.js"></script>
   </head>
   <body>
     <header>
@@ -13,27 +12,33 @@
     </header>
 
     <div class="score-board">
-      <div id="user-label" class="badge">user</div>
-      <div id="computer-label" class="badge">comp</div>
-      <span id="user-score">0</span>:<span id="computer-score">0</span>
+      <div class="score-panel user-panel">
+        <div id="user-label" class="score-label">USER</div>
+        <span id="user-score" class="score-number">00</span>
+      </div>
+      <div class="score-panel computer-panel">
+        <div id="computer-label" class="score-label">COMP</div>
+        <span id="computer-score" class="score-number">00</span>
+      </div>
     </div>
 
     <div class="result">
-      <p>Paper covers rock!!! You win!!!</p>
+      <p>Let's play a game!!</p>
     </div>
 
     <div class="choices">
-      <div class="choice" id="rock">
+      <div class="choice" id="r">
         <img src="images/rock.png" alt="" />
       </div>
-      <div class="choice" id="paper">
+      <div class="choice" id="p">
         <img src="images/paper.png" alt="" />
       </div>
-      <div class="choice" id="scissors">
+      <div class="choice" id="s">
         <img src="images/scissors.png" alt="" />
       </div>
     </div>
 
     <p id="action-prompt">Make your move!</p>
+    <script src="scripts.js"></script>
   </body>
 </html>
